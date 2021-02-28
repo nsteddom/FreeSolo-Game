@@ -9,11 +9,16 @@ demo.state0.prototype = {
 
     preload: function(){
         
+
+        // Images, Sprites, and Sounds to be used in this scene. 
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         //game.load.image('mountain', 'assets/');
         game.load.image('sky', 'assets/sky.png');
         game.load.image('ground', 'assets/platform.png');
-        game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32)
+        game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
+        game.load.image('star', 'assets/star.png');
+
+
 
 
     },
@@ -27,11 +32,18 @@ demo.state0.prototype = {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.add.sprite(0, 0, 'sky');
 
+        // Added star image in the game for animated aspect. 
+        star = game.add.image(550, game.world.height - 300, 'star')
+
         
-        player = game.add.sprite(32, game.world.height - 150, 'baddie')
+        player = game.add.sprite(300, game.world.height - 150, 'baddie')
         game.physics.enable(player)
         // player.body.gravity.y = 500
-        player.body.collideWorldBounds = true   
+        player.body.collideWorldBounds = true;  
+
+        
+        
+        
 
 
         
@@ -57,6 +69,11 @@ demo.state0.prototype = {
     update: function(){
         
         // game.physics.arcade.collide(player, ground)
+
+        // Makes star go in a circle
+        // star.angle +=3;
+        moveStar(star, 1);
+
         
         text.destroy();
       
@@ -110,6 +127,20 @@ function addChangeStateEventListeners(){
     addKeyCallback(Phaser.Keyboard.ZERO, changeState, 0);
     addKeyCallback(Phaser.Keyboard.ONE, changeState, 1);
     
+    }
+
+
+function moveStar(star, speed) {
+    star.x += speed;
+    if (star.x > game.world.width) {
+        resetStarPos(star);
+    }
+    }
+
+function resetStarPos(star) {
+    star.x = 0;
+    // var randomY = Math.between(0, game.world.height);
+    star.y = 300
     }
 
 
