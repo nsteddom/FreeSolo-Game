@@ -19,6 +19,8 @@ demo.state0.prototype = {
         game.load.image('star', 'assets/star.png');
         game.load.audio('music', 'assets/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
         game.load.audio('soundeffect', 'assets/mixkit-meadow-wind-light-1166.wav')
+        game.load.image('water','assets/Bottle.png');
+        game.load.image('mountain', 'assets/mountain.png', 800, 400);
 
 
 
@@ -33,6 +35,9 @@ demo.state0.prototype = {
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.add.sprite(0, 0, 'sky');
+        game.add.sprite(200, 300, 'mountain');
+        game.add.sprite(200, 0, 'mountain');
+        game.add.sprite(300, 200, 'water');
 
         // Added star image in the game for animated aspect. 
         star = game.add.image(550, game.world.height - 300, 'star')
