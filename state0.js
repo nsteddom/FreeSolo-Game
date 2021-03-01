@@ -17,6 +17,8 @@ demo.state0.prototype = {
         game.load.image('ground', 'assets/platform.png');
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         game.load.image('star', 'assets/star.png');
+        game.load.audio('music', 'assets/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
+        game.load.audio('soundeffect', 'assets/mixkit-meadow-wind-light-1166.wav')
 
 
 
@@ -40,6 +42,22 @@ demo.state0.prototype = {
         game.physics.enable(player)
         // player.body.gravity.y = 500
         player.body.collideWorldBounds = true;  
+
+        backgroundMusic = game.add.audio('music');
+
+        soundEffect = game.add.audio('soundeffect');
+
+        var musicConfig = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            loop: false,
+            delay: 0
+        }
+
+        backgroundMusic.play();
+        soundEffect.play();
 
         
         
