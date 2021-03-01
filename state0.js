@@ -76,6 +76,9 @@ demo.state0.prototype = {
         if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             player.y -= speed;
             heightClimbed += speed;    
+            if (heightClimbed > game.world.height){
+                heightClimbed = game.world.height;
+            }
         }
 
         
