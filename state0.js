@@ -52,21 +52,8 @@ demo.state0.prototype = {
 
         soundEffect = game.add.audio('soundeffect');
 
-        var musicConfig = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            loop: false,
-            delay: 0
-        }
-
         backgroundMusic.play();
         soundEffect.play();
-
-        
-        
-        
 
 
         
