@@ -1,9 +1,10 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {}, speed = 5, heightClimbed=0, text;
+var demo = {},  speed = 5, heightClimbed=0, text;
 
 demo.state0 = function(){};
+
 
 demo.state0.prototype = {
 
@@ -21,6 +22,9 @@ demo.state0.prototype = {
         game.load.audio('soundeffect', 'assets/mixkit-meadow-wind-light-1166.wav')
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
+        game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
+        game.load.spritesheet('rock', 'assets/rock.png', 60, 65);
+        game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
 
 
 
@@ -35,43 +39,49 @@ demo.state0.prototype = {
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.add.sprite(0, 0, 'sky');
-        game.add.sprite(200, 300, 'mountain');
-        game.add.sprite(200, 0, 'mountain');
-        game.add.sprite(300, 200, 'water');
+        game.add.sprite(120, 300, 'mountain');
+        game.add.sprite(120, 0, 'mountain');
+       
+        player = game.add.sprite(300, game.world.height - 150, 'climber')
+        rock = game.add.sprite(350, 0, 'rock');
+        bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
 
         // Added star image in the game for animated aspect. 
-        star = game.add.image(550, game.world.height - 300, 'star')
+        //star = game.add.image(550, game.world.height - 300, 'star')
 
         
-        player = game.add.sprite(300, game.world.height - 150, 'baddie')
-        game.physics.enable(player)
+        
+        game.physics.arcade.enable(player)
+        game.physics.arcade.enable(rock)
+        
         // player.body.gravity.y = 500
         player.body.collideWorldBounds = true;  
+     
+        
 
         backgroundMusic = game.add.audio('music');
 
         soundEffect = game.add.audio('soundeffect');
 
-        var musicConfig = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            loop: false,
-            delay: 0
-        }
-
         backgroundMusic.play();
         soundEffect.play();
 
-        
-        
-        
+        rock.animations.add('all', [0, 1, 2], 3, true);
+        bird.animations.add('all', [0, 1], 4, true);
+        player.animations.add('all', [0, 1, 2, 3, 4], 5, true);
+      
+        waters = game.add.group();
+        waters.enableBody = true;
+       
+
+        for (i = 0; i < 6; i++) {
+            var water = waters.create(250 + i * 50, 50 + 80 * i, 'water');
+            
+        }
 
 
-        
         text = game.add.text(0,0, "Height Climbed")
-
+        
 
         // platforms = game.add.group()
         // platforms.enableBody = true
@@ -95,12 +105,18 @@ demo.state0.prototype = {
 
         // Makes star go in a circle
         // star.angle +=3;
-        moveStar(star, 1);
+        moveStar(bird, 2);
+        moveRock(rock, 1);
 
         
         text.destroy();
       
         text = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString());
+        game.physics.arcade.overlap(player, waters, drinkWater, null, this);
+        rock.animations.play('all');
+        bird.animations.play('all');
+        player.animations.play('all');
+
         
         if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             player.x += speed;
@@ -133,9 +149,9 @@ demo.state0.prototype = {
 
         }
         
+        
   }
     
-
 
     }
 function changeState(i, stateNum){
@@ -156,18 +172,41 @@ function addChangeStateEventListeners(){
     }
 
 
-function moveStar(star, speed) {
-    star.x += speed;
-    if (star.x > game.world.width) {
-        resetStarPos(star);
+function moveRock(rock, speed) {
+    rock.y += speed + rock.y/42;
+    if (rock.y > game.world.height) {
+        resetRockPos(rock);
+    }
+    }
+    
+function resetRockPos(rock) {
+    rock.y = 0;
+    // var randomY = Math.between(0, game.world.height);
+    rock.x = Math.random() * game.world.width
+    }
+
+function moveStar(bird, speed) {
+    bird.x -= speed;
+    if (bird.x < 0) {
+        resetStarPos(bird);
     }
     }
 
-function resetStarPos(star) {
-    star.x = 0;
+function resetStarPos(bird) {
+    bird.x = game.world.width;
     // var randomY = Math.between(0, game.world.height);
-    star.y = 300
+    bird.y = 300
     }
+
+function rockKills(player, rocks) {
+    player.destroy();
+    moveRock(rocks, speed);
+    
+}
+
+function drinkWater(player, water) {
+    water.destroy();
+}
 
 
 
