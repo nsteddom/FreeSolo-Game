@@ -13,9 +13,9 @@ demo.state0.prototype = {
 
         // Images, Sprites, and Sounds to be used in this scene. 
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
-        //game.load.image('mountain', 'assets/');
-        // game.load.image('sky', 'assets/sky.png');
-        // game.load.image('ground', 'assets/platform.png');
+        game.load.image('mountain', 'assets/');
+        game.load.image('sky', 'assets/sky.png');
+        game.load.image('ground', 'assets/platform.png');
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         game.load.image('star', 'assets/star.png');
         game.load.audio('music', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
@@ -33,9 +33,7 @@ demo.state0.prototype = {
 
 
     create: function(){
-        map = game.add.tilemap('base')
-        map.addTilesetImage('rockTile1', 'rockTile1');
-        layer = map.createLayer('Scene1');
+
 
 
 
