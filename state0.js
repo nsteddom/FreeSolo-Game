@@ -14,12 +14,12 @@ demo.state0.prototype = {
         // Images, Sprites, and Sounds to be used in this scene. 
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         //game.load.image('mountain', 'assets/');
-        game.load.image('sky', 'assets/sky.png');
-        game.load.image('ground', 'assets/platform.png');
+        // game.load.image('sky', 'assets/sky.png');
+        // game.load.image('ground', 'assets/platform.png');
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         game.load.image('star', 'assets/star.png');
-        game.load.audio('music', 'assets/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
-        game.load.audio('soundeffect', 'assets/mixkit-meadow-wind-light-1166.wav')
+        game.load.audio('music', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
+        game.load.audio('soundeffect', 'assets/sounds/mixkit-meadow-wind-light-1166.wav');
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
@@ -33,6 +33,14 @@ demo.state0.prototype = {
 
 
     create: function(){
+        map = game.add.tilemap('base')
+        map.addTilesetImage('rockTile1', 'rockTile1');
+        layer = map.createLayer('Scene1');
+
+
+
+
+
         
         game.physics.startSystem(Phaser.Physics.ARCADE)
 
