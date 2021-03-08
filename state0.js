@@ -48,6 +48,17 @@ demo.state0.prototype = {
         game.add.sprite(120, 300, 'mountain');
         game.add.sprite(120, 0, 'mountain');
        
+        
+
+        waters = game.add.group();
+        waters.enableBody = true;
+       
+
+        for (i = 0; i < 6; i++) {
+            var water = waters.create(250 + i * 50, 50 + 80 * i, 'water');
+            
+        }
+
         player = game.add.sprite(300, game.world.height - 150, 'climber')
         rock = game.add.sprite(350, 0, 'rock');
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
@@ -74,16 +85,9 @@ demo.state0.prototype = {
 
         rock.animations.add('all', [0, 1, 2], 3, true);
         bird.animations.add('all', [0, 1], 4, true);
-        player.animations.add('all', [0, 1, 2, 3, 4], 5, true);
+        player.animations.add('all', [0, 1, 2, 3, 4], 15, true);
       
-        waters = game.add.group();
-        waters.enableBody = true;
        
-
-        for (i = 0; i < 6; i++) {
-            var water = waters.create(250 + i * 50, 50 + 80 * i, 'water');
-            
-        }
 
 
         heightClimbedText = game.add.text(0,0, "Height Climbed")
@@ -111,13 +115,13 @@ demo.state0.prototype = {
 
         // Makes star go in a circle
         // star.angle +=3;
-        moveStar(bird, 2);
+        moveBird(bird, 3);
         moveRock(rock, 1);
 
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
         rock.animations.play('all');
         bird.animations.play('all');
-        player.animations.play('all');
+        
 
         if (Math.abs(player.x-rock.x) < 25 && Math.abs(player.y-rock.y) < 25){
             rockCollision();
@@ -141,20 +145,30 @@ demo.state0.prototype = {
         }
 
         
-        if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             player.x += speed;
+
+            player.animations.play('all');
+
             HP -=1
         }
 
         else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             player.x -= speed;
+
+            player.animations.play('all');
+            
+
             HP -= 1
             
         }
 
+
         else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             player.y -= speed;
+            player.animations.play('all');
             heightClimbed += speed;    
+            
             if (heightClimbed > game.world.height){
                 heightClimbed = game.world.height;
 
@@ -163,25 +177,28 @@ demo.state0.prototype = {
             else{
                 HP-=1
             }
+            
         }
 
         
         else if  (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
             player.y += speed;
+            player.animations.play('all');
             heightClimbed -= speed;
+           
             if (heightClimbed < 0){
                 heightClimbed = 0;
             }
+
             else{
                 HP-=1
             }
-                
-
-
+               
         }
 
         else{
             player.frame = 0
+
         }
         
         
@@ -220,17 +237,17 @@ function resetRockPos(rock) {
     rock.x = Math.random() * game.world.width
     }
 
-function moveStar(bird, speed) {
+function moveBird(bird, speed) {
     bird.x -= speed;
     if (bird.x < 0) {
-        resetStarPos(bird);
+        resetBirdPos(bird);
     }
     }
 
-function resetStarPos(bird) {
+function resetBirdPos(bird) {
     bird.x = game.world.width;
     // var randomY = Math.between(0, game.world.height);
-    bird.y = 300
+    bird.y = Math.random() * game.world.height
     }
 
 function rockCollision(){
