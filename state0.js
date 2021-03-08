@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, text;
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext ;
 
 demo.state0 = function(){};
 
@@ -13,13 +13,13 @@ demo.state0.prototype = {
 
         // Images, Sprites, and Sounds to be used in this scene. 
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
-        //game.load.image('mountain', 'assets/');
+        game.load.image('mountain', 'assets/');
         game.load.image('sky', 'assets/sky.png');
         game.load.image('ground', 'assets/platform.png');
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         game.load.image('star', 'assets/star.png');
-        game.load.audio('music', 'assets/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
-        game.load.audio('soundeffect', 'assets/mixkit-meadow-wind-light-1166.wav')
+        game.load.audio('music', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
+        game.load.audio('soundeffect', 'assets/sounds/mixkit-meadow-wind-light-1166.wav');
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
@@ -33,6 +33,12 @@ demo.state0.prototype = {
 
 
     create: function(){
+
+
+
+
+
+
         
         game.physics.startSystem(Phaser.Physics.ARCADE)
 
@@ -84,8 +90,8 @@ demo.state0.prototype = {
        
 
 
-        text = game.add.text(0,0, "Height Climbed")
-        
+        heightClimbedText = game.add.text(0,0, "Height Climbed")
+        HPtext = game.add.text(625,0, "HPtext")
 
         // platforms = game.add.group()
         // platforms.enableBody = true
@@ -112,26 +118,51 @@ demo.state0.prototype = {
         moveBird(bird, 3);
         moveRock(rock, 1);
 
-        
-        text.destroy();
-      
-        text = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString());
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
         rock.animations.play('all');
         bird.animations.play('all');
         
 
+        if (Math.abs(player.x-rock.x) < 25 && Math.abs(player.y-rock.y) < 25){
+            rockCollision();
+
+        }
+
+
+        if (HP >= 0){
+            HPtext.destroy();
+            heightClimbedText.destroy();
+
+            HPtext = game.add.text(600,0, "HP: " + HP.toString());
+            heightClimbedText = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString());
+        }
+        else{
+            HPtext.destroy();
+            player.destroy();
+
+            HPtext = game.add.text(600,0, "You are dead");
+            
+        }
+
         
         if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             player.x += speed;
+
             player.animations.play('all');
+
+            HP -=1
         }
+
         else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             player.x -= speed;
+
             player.animations.play('all');
             
+
+            HP -= 1
+            
         }
-        
+
 
         else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             player.y -= speed;
@@ -140,6 +171,11 @@ demo.state0.prototype = {
             
             if (heightClimbed > game.world.height){
                 heightClimbed = game.world.height;
+
+
+            }
+            else{
+                HP-=1
             }
             
         }
@@ -153,12 +189,16 @@ demo.state0.prototype = {
             if (heightClimbed < 0){
                 heightClimbed = 0;
             }
-            
-            
 
+            else{
+                HP-=1
+            }
+               
         }
+
         else{
-            player.frame = 0;
+            player.frame = 0
+
         }
         
         
@@ -185,7 +225,7 @@ function addChangeStateEventListeners(){
 
 
 function moveRock(rock, speed) {
-    rock.y += speed + rock.y/42;
+    rock.y += speed + rock.y/30;
     if (rock.y > game.world.height) {
         resetRockPos(rock);
     }
@@ -210,6 +250,10 @@ function resetBirdPos(bird) {
     bird.y = Math.random() * game.world.height
     }
 
+function rockCollision(){
+    HP -= 175
+}
+
 function rockKills(player, rocks) {
     player.destroy();
     moveRock(rocks, speed);
@@ -218,6 +262,8 @@ function rockKills(player, rocks) {
 
 function drinkWater(player, water) {
     water.destroy();
+    HP += 250
+
 }
 
 
