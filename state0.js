@@ -42,7 +42,8 @@ demo.state0.prototype = {
 
 
         
-        game.physics.startSystem(Phaser.Physics.ARCADE)
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.stage.backgroundColor = '#800080';
 
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -225,22 +226,6 @@ demo.state0.prototype = {
   }
     
 
-    }
-function changeState(i, stateNum){
-    console.log('state' + stateNum);
-    game.state.start('state' + stateNum);
-    }
-
-
-function addKeyCallback(key, fn, args){
-    game.input.keyboard.addKey(key).onDown.add(fn, null, null, args);
-    }
-    
-
-function addChangeStateEventListeners(){
-    addKeyCallback(Phaser.Keyboard.ZERO, changeState, 0);
-    addKeyCallback(Phaser.Keyboard.ONE, changeState, 1);
-    
     }
 
 
