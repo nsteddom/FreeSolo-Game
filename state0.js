@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext ;
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true ;
 
 demo.state0 = function(){};
 
@@ -20,11 +20,21 @@ demo.state0.prototype = {
         game.load.image('star', 'assets/star.png');
         game.load.audio('music', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
         game.load.audio('soundeffect', 'assets/sounds/mixkit-meadow-wind-light-1166.wav');
+
+        game.load.audio('deathSound', 'assets/sounds/deathSound.mp3');
+
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
         game.load.spritesheet('rock', 'assets/rock.png', 60, 65);
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
+        game.load.tilemap('base', 'assets/tiles/try.json', null, Phaser.Tilemap.TILED_JSON);
+        // // game.load.image('rock1', 'assets/tiles/rock1.png')
+        // // game.load.image('rock2', 'assets/tiles/rock2.png')
+        // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
+        game.load.image('sky', 'assets/tiles/sky.png')
+        
+        
 
 
 
@@ -33,6 +43,19 @@ demo.state0.prototype = {
 
 
     create: function(){
+
+        var base = game.add.tilemap('base');
+        var layer = base.createLayer('Tile Layer 1')
+        // // base.addTilesetImage('rock1');
+        // // base.addTilesetImage('rock2');
+        // // base.addTilesetImage('rockObstacle');
+        base.addTilesetImage('sky', 'sky', 32, 32, 0, 0);
+        
+
+        // // var rock1 = base.createLayer('rock1');
+        // // var rock2 = base.createLayer('rock2');
+        // // var rockObstacle = base.createLayer('rockObstacle');
+        // var sky = base.createLayer('sky');
 
 
 
@@ -44,9 +67,9 @@ demo.state0.prototype = {
 
         addChangeStateEventListeners();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        game.add.sprite(0, 0, 'sky');
-        game.add.sprite(120, 300, 'mountain');
-        game.add.sprite(120, 0, 'mountain');
+        // game.add.sprite(0, 0, 'sky');
+        // game.add.sprite(120, 300, 'mountain');
+        // game.add.sprite(120, 0, 'mountain');
        
         
 
@@ -79,6 +102,8 @@ demo.state0.prototype = {
         backgroundMusic = game.add.audio('music');
 
         soundEffect = game.add.audio('soundeffect');
+
+        deathSound = game.add.audio('deathSound');
 
         backgroundMusic.play();
         soundEffect.play();
@@ -115,6 +140,9 @@ demo.state0.prototype = {
 
         // Makes star go in a circle
         // star.angle +=3;
+
+        
+
         moveBird(bird, 3);
         moveRock(rock, 1);
 
@@ -137,6 +165,12 @@ demo.state0.prototype = {
             heightClimbedText = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString());
         }
         else{
+            
+            if (isAlive){
+                deathSound.play();
+                isAlive = false;
+            }
+
             HPtext.destroy();
             player.destroy();
 
@@ -168,6 +202,7 @@ demo.state0.prototype = {
             player.y -= speed;
             player.animations.play('all');
             heightClimbed += speed;    
+  
             
             if (heightClimbed > game.world.height){
                 heightClimbed = game.world.height;
