@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true ;
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null ;
 
 demo.state0 = function(){};
 
@@ -28,10 +28,9 @@ demo.state0.prototype = {
         game.load.spritesheet('rock2', 'assets/rock.png', 60,65);
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
         game.load.tilemap('base', 'assets/tiles/try.json', null, Phaser.Tilemap.TILED_JSON);
-        // // game.load.image('rock1', 'assets/tiles/rock1.png')
-        // // game.load.image('rock2', 'assets/tiles/rock2.png')
-        // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
         game.load.image('sky', 'assets/tiles/sky.png')
+        game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
+        game.load.image('obstacle', 'assets/tiles/obstacle.png')
         
         
 
@@ -43,12 +42,16 @@ demo.state0.prototype = {
 
     create: function(){
 
+
+
         var base = game.add.tilemap('base');
-        var layer = base.createLayer('Tile Layer 1')
-        // // base.addTilesetImage('rock1');
-        // // base.addTilesetImage('rock2');
-        // // base.addTilesetImage('rockObstacle');
-        base.addTilesetImage('sky', 'sky', 32, 32, 0, 0);
+
+
+        base.addTilesetImage('sky');
+        base.addTilesetImage('obstacle');
+        base.addTilesetImage('rockTile1');
+        
+        var base = base.createLayer('Tile Layer 1')
         
 
         // // var rock1 = base.createLayer('rock1');
