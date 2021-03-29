@@ -73,7 +73,6 @@ demo.state0.prototype = {
 
         
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        game.stage.backgroundColor = '#800080';
 
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         // game.add.sprite(0, 0, 'sky');
