@@ -275,7 +275,7 @@ demo.state0.prototype = {
         if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 
             if (player.x < game.world.width-160){
-                player.x += HP*speed/1000;
+                player.x += speed*(HP/1000)*(HP/1000);
                 player.animations.play('all');
                 HP -=1
     
@@ -288,7 +288,7 @@ demo.state0.prototype = {
         if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 
             if (player.x > 120 ){
-                player.x -= HP*speed/1000;    
+                player.x -= speed*(HP/1000)*(HP/1000);    
                 HP -= 1
                 player.animations.play('all');
 
@@ -298,7 +298,7 @@ demo.state0.prototype = {
         }
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-            player.y += HP*speed/1000;
+            player.y += speed*(HP/1000)*(HP/1000);
             player.animations.play('all');
            
             if (localheight < 0){
@@ -306,8 +306,8 @@ demo.state0.prototype = {
             }
 
             else{
-                heightClimbed -= HP*speed/1000;
-                localheight -= HP*speed/1000;
+                heightClimbed -= speed*(HP/1000)*(HP/1000);
+                localheight -= speed*(HP/1000)*(HP/1000);
                 HP -= 1
 
             }
@@ -316,11 +316,11 @@ demo.state0.prototype = {
 
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-            player.y -= HP*speed/1000;
+            player.y -= speed*(HP/1000)*(HP/1000);
             player.animations.play('all');
 
-            heightClimbed += HP*speed/1000; 
-            localheight += HP*speed/1000;   
+            heightClimbed += speed*(HP/1000)*(HP/1000); 
+            localheight += speed*(HP/1000)*(HP/1000);   
   
             
             if (localheight > game.world.height){
