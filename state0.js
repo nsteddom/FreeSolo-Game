@@ -116,9 +116,9 @@ demo.state0.prototype = {
         // rock1.scale.setTo(2,2);
         // rock2.scale.setTo(2,2);
 
-        for (i =0; i<levelcount; i++){
-            rocklist[i].scale.setTo(2,2);
-        }
+        // for (i =0; i<levelcount; i++){
+        //     rocklist[i].scale.setTo(2,2);
+        // }
 
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
         bird.scale.setTo(0.6,0.6);
