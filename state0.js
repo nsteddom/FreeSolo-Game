@@ -31,6 +31,11 @@ demo.state0.prototype = {
 
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
         game.load.tilemap('base', 'assets/tiles/try.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.image('banana', 'assets/banana.png');
+        game.load.image('person', 'assets/person.png');
+        // // game.load.image('rock1', 'assets/tiles/rock1.png')
+        // // game.load.image('rock2', 'assets/tiles/rock2.png')
+        // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
         game.load.image('sky', 'assets/tiles/sky.png')
         game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
         game.load.image('obstacle', 'assets/tiles/obstacle.png')
@@ -81,11 +86,24 @@ demo.state0.prototype = {
         waters = game.add.group();
         waters.enableBody = true;
        
-
-        for (i = 0; i < 6; i++) {
-            var water = waters.create(250 + i * 50, 50 + 80 * i, 'water');
+        var i = 0;
+        while (i < 2) {
+            var water = waters.create(250 + (i * 200) + ((Math.random() * 130)), (50 + (i * 150) + (Math.random() * (game.world.height - 200))), 'water');
+            i++
             
         }
+
+        bananas = game.add.group();
+        bananas.scale.setTo(.8, .8);
+        bananas.enableBody = true;
+
+        var n = 0;
+        while (n < 1) {
+            var banana = bananas.create(250 + (n * 100) + ((Math.random() * 200)), (70 + (Math.random() * (game.world.height - 200))), 'banana');
+            console.log('banana')
+            n++;
+        }
+
 
         player = game.add.sprite(300, game.world.height, 'climber')
 
@@ -132,8 +150,6 @@ demo.state0.prototype = {
         backgroundMusic = game.add.audio('music');
 
         soundEffect = game.add.audio('soundeffect');
-        deathSound = game.add.audio('deathSound');
-
         deathSound = game.add.audio('deathSound');
 
         backgroundMusic.play();
@@ -197,13 +213,20 @@ demo.state0.prototype = {
         // if (Math.abs(player.x-rock1.x) < 27 && Math.abs(player.y-rock1.y) < 50){
         //     rockCollision();
 
+
+        game.physics.arcade.overlap(player, waters, drinkWater, null, this);
+        game.physics.arcade.overlap(player, bananas, eatBanana, null, this);
+        rock1.animations.play('all');
+        rock2.animations.play('all')
+        bird.animations.play('all');
+
         // }
 
         // if (Math.abs(player.x-rock2.x) < 27 && Math.abs(player.y-rock2.y) < 50){
         //     rockCollision();
 
         // }
-        
+
         
 
 
@@ -368,6 +391,11 @@ function drinkWater(player, water) {
     water.destroy();
     HP += 250
 
+}
+
+function eatBanana(player, banana) {
+    banana.destroy();
+    HP += 50;
 }
 
 
