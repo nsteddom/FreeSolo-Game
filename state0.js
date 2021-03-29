@@ -203,7 +203,7 @@ demo.state0.prototype = {
 
         
         for (i =0; i<levelcount; i++){
-            if (Math.abs(player.x-rocklist[i].x) < 27 && Math.abs(player.y-rocklist[i].y) < 50){
+            if (Math.abs(player.x-rocklist[i].x) < 25 && Math.abs(player.y-rocklist[i].y) < 25){
                 rockCollision();
     
             }
