@@ -37,7 +37,10 @@ demo.state0.prototype = {
         // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
         game.load.image('sky', 'assets/tiles/sky.png')
         game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
-        game.load.image('obstacle', 'assets/tiles/obstacle.png')
+        game.load.image('rockobstacle', 'assets/tiles/rockobstacle.png')
+        game.load.image('black', 'assets/tiles/black.png')
+        game.load.image('cloud', 'assets/tiles/cloud.png')
+        game.load.image('sun', 'assets/tiles/sun.png')
         
         
 
@@ -54,10 +57,17 @@ demo.state0.prototype = {
 
 
         base.addTilesetImage('sky');
-        base.addTilesetImage('obstacle');
-        base.addTilesetImage('rockTile1');
         
-        var base = base.createLayer('Tile Layer 1')
+        base.addTilesetImage('rockTile1');
+        base.addTilesetImage('black');
+        base.addTilesetImage('cloud');
+        base.addTilesetImage('sun');
+        base.addTilesetImage('rockobstacle');
+        
+        layer1 = base.createLayer('Tile Layer 1');
+        layer2 = base.createLayer('Tile Layer 2');
+        
+        base.setCollisionBetween(26, 61, true, 'Tile Layer 2');
         
 
         // // var rock1 = base.createLayer('rock1');
@@ -71,7 +81,7 @@ demo.state0.prototype = {
 
 
 
-        
+       
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -189,7 +199,7 @@ demo.state0.prototype = {
 
 
     update: function(){
-
+        game.physics.arcade.collide(player, layer2, function(){ console.log('SHIT!!!')});
         heightClimbed = Math.max(0, heightClimbed);
         heightClimbed = Math.round(heightClimbed);
 
