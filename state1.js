@@ -4,8 +4,10 @@ demo.state1 = function(){
 
 demo.state1.prototype = {
     preload: function(){
-        game.load.image('sky', 'assets/sky.png');
+        game.load.image('background', 'assets/back3.png');
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
+        game.load.audio('mountain', 'assets/sounds/mountain_top.wav');
+        var logo = game.load.image('logo', 'assets/b4.svg', 800, 500)
 
 
     },
@@ -13,18 +15,23 @@ demo.state1.prototype = {
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#800080';
-        game.add.sprite(0, 0, 'sky');
+        const music = game.add.audio('mountain', .1, true)
+        game.add.sprite(0, 0, 'background');
+        game.add.image(470, 60, 'logo');
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
         bird.scale.setTo(0.6,0.6);
         bird.animations.add('all', [0, 1], 4, true);
+
+        var style = {font: "bold 20px Arial", align: "right"}
+        var style2 = {font: "bold 20px Arial", fill: "#fff", align: "right"}
         
 
 
-
-        game.add.text(0,0,"Welcome to FreeSolo!");
-        game.add.text(0,50, "Climb an unforgiving mountain using the arrow keys to move.");
-        game.add.text(0,100, "Be careful with your HP and make sure it doesn't drop to zero!");
-        game.add.text(0,150, "Press 1 to start!");
+        game.add.text(400,230, "Climb an unforgiving mountain using\nthe arrow keys to move.", style);
+        game.add.text(620,320, "Try not to die.", style);
+        game.add.text(580,575, "Press 1 to commence", style2);
+   
+        music.play();
 
 
 
@@ -44,6 +51,13 @@ demo.state1.prototype = {
 
 function changeState(i, stateNum){
     game.state.start('state' + 0);
+    localheight = 0;
+    backgroundMusic.pause();
+    soundEffect.pause();
+    HP = 1000;
+    leveltext.destroy();
+    levelcount += 1;
+
   }
   
   function addKeyCallback(key, fn, args){
@@ -73,5 +87,5 @@ function changeState(i, stateNum){
 function resetBirdPos(bird) {
     bird.x = game.world.width;
     // var randomY = Math.between(0, game.world.height);
-    bird.y = Math.random() * game.world.height
+    bird.y = Math.random() * (game.world.height - 200)
     }
