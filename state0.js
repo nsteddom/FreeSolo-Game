@@ -146,10 +146,10 @@ demo.state0.prototype = {
      
         
 
-        backgroundMusic = game.add.audio('backgroundMusic');
+        backgroundMusic = game.add.audio('backgroundMusic', .2);
 
-        soundEffect = game.add.audio('soundeffect');
-        deathSound = game.add.audio('deathSound');
+        soundEffect = game.add.audio('soundeffect', .2);
+        deathSound = game.add.audio('deathSound'), .2;
 
         backgroundMusic.play();
         soundEffect.play();
