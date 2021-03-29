@@ -19,13 +19,12 @@ demo.state0.prototype = {
         game.load.image('ground', 'assets/platform.png');
         game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
         game.load.image('star', 'assets/star.png');
-        game.load.audio('music', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
+        game.load.audio('backgroundMusic', 'assets/sounds/speck_-_Drum_n_Bird_03_(The_Crowening).mp3');
         game.load.audio('soundeffect', 'assets/sounds/mixkit-meadow-wind-light-1166.wav');
         game.load.audio('deathSound', 'assets/sounds/deathSound.mp3');
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
-
         game.load.spritesheet('rock', 'assets/rock.png', 60, 65);
 
 
@@ -147,7 +146,7 @@ demo.state0.prototype = {
      
         
 
-        backgroundMusic = game.add.audio('music');
+        backgroundMusic = game.add.audio('backgroundMusic');
 
         soundEffect = game.add.audio('soundeffect');
         deathSound = game.add.audio('deathSound');
@@ -216,8 +215,6 @@ demo.state0.prototype = {
 
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
         game.physics.arcade.overlap(player, bananas, eatBanana, null, this);
-        rock1.animations.play('all');
-        rock2.animations.play('all')
         bird.animations.play('all');
 
         // }
