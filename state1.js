@@ -15,12 +15,13 @@ demo.state1.prototype = {
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#800080';
-        const music = game.add.audio('mountain', .1, true)
+        music = game.add.audio('mountain', .2)
         game.add.sprite(0, 0, 'background');
         game.add.image(470, 60, 'logo');
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
         bird.scale.setTo(0.6,0.6);
         bird.animations.add('all', [0, 1], 4, true);
+        
 
         var style = {font: "bold 20px Arial", align: "right"}
         var style2 = {font: "bold 20px Arial", fill: "#fff", align: "right"}
@@ -31,18 +32,19 @@ demo.state1.prototype = {
         game.add.text(620,320, "Try not to die.", style);
         game.add.text(580,575, "Press 1 to commence", style2);
    
+        
+
+        
         music.play();
-
-
 
 
         addChangeStateEventListeners();
 
-        game.add.text()
-
+    
     },
 
     update: function(){
+        music.resume();
         moveBird(bird, 3);
         bird.animations.play('all');
 
@@ -52,10 +54,9 @@ demo.state1.prototype = {
 function changeState(i, stateNum){
     game.state.start('state' + 0);
     localheight = 0;
-    backgroundMusic.pause();
-    soundEffect.pause();
+    music.pause();
     HP = 1000;
-    leveltext.destroy();
+
     levelcount += 1;
 
   }

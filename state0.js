@@ -180,7 +180,8 @@ demo.state0.prototype = {
 
         heightClimbedText = game.add.text(0,0, "Height Climbed");
         HPtext = game.add.text(625,0, "HPtext");
-        leveltext = game.add.text(625,125, "Level: " + levelcount);
+        var style3 = {font: "bold 22px Arial"}
+        leveltext = game.add.text(690,50, "Level: " + (levelcount - 1), style3);
 
         // platforms = game.add.group()
         // platforms.enableBody = true
@@ -263,9 +264,10 @@ demo.state0.prototype = {
         if (HP >= 0){
             HPtext.destroy();
             heightClimbedText.destroy();
-
-            HPtext = game.add.text(600,0, "HP: " + HP.toString());
-            heightClimbedText = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString());
+            var style2 = {font: "bold 22px Arial"}
+            HPtext = game.add.text(690,0, "HP: " + HP.toString(), style2);
+            var style = {fill: "#fff", font: "bold 22px Arial"}
+            heightClimbedText = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString(), style);
         }
         else{
             if (isAlive){
@@ -276,8 +278,9 @@ demo.state0.prototype = {
             }
             HPtext.destroy();
             player.destroy();
+    
+            HPtext = game.add.text(600,0, "You are dead", style2);
 
-            HPtext = game.add.text(600,0, "You are dead");
             
         }
 
@@ -395,7 +398,7 @@ function rockCollision(){
 
 function drinkWater(player, water) {
     water.destroy();
-    HP += 250
+    HP += 100
 
 }
 
