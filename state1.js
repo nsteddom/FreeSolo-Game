@@ -50,8 +50,14 @@ demo.state1.prototype = {
 }
 
 function changeState(i, stateNum){
-    console.log(stateNum);
     game.state.start('state' + 0);
+    localheight = 0;
+    backgroundMusic.pause();
+    soundEffect.pause();
+    HP = 1000;
+    leveltext.destroy();
+    levelcount += 1;
+
   }
   
   function addKeyCallback(key, fn, args){
