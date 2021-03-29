@@ -278,7 +278,7 @@ demo.state0.prototype = {
             }
             HPtext.destroy();
             player.destroy();
-    
+            var style2 = {font: "bold 22px Arial"};
             HPtext = game.add.text(600,0, "You are dead", style2);
 
             
