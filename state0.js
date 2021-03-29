@@ -86,7 +86,7 @@ demo.state0.prototype = {
         waters.enableBody = true;
        
         var i = 0;
-        while (i < 2) {
+        while (i < 4) {
             var water = waters.create(250 + (i * 200) + ((Math.random() * 130)), (50 + (i * 150) + (Math.random() * (game.world.height - 200))), 'water');
             i++
             
@@ -97,7 +97,7 @@ demo.state0.prototype = {
         bananas.enableBody = true;
 
         var n = 0;
-        while (n < 1) {
+        while (n < 3) {
             var banana = bananas.create(250 + (n * 100) + ((Math.random() * 200)), (70 + (Math.random() * (game.world.height - 200))), 'banana');
             console.log('banana')
             n++;
@@ -379,7 +379,7 @@ function resetBirdPos(bird) {
     }
 
 function rockCollision(){
-    HP -= 300
+    HP -= 175
 }
 
 
