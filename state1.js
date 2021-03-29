@@ -15,7 +15,7 @@ demo.state1.prototype = {
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#800080';
-        const music = game.add.audio('mountain', .5, true)
+        const music = game.add.audio('mountain', .1, true)
         game.add.sprite(0, 0, 'background');
         game.add.image(470, 60, 'logo');
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
