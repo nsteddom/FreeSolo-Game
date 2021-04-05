@@ -112,7 +112,7 @@ demo.state0.prototype = {
        
         var i = 0;
         while (i < 4) {
-            var water = waters.create(250 + (i * 200) + ((Math.random() * 130)), (50 + (i * 150) + (Math.random() * (game.world.height - 200))), 'water');
+            var water = waters.create(250 + (i * 150) + ((Math.random() * 130)), (50 + (i * 150) + (Math.random() * (game.world.height - 200))), 'water');
             i++
             
         }
@@ -196,11 +196,11 @@ demo.state0.prototype = {
       
        
 
-
-        heightClimbedText = game.add.text(0,0, "Height Climbed");
+        var style4 = {font: "bold 22px Arial", fill: "#fff"}
+        heightClimbedText = game.add.text(0,0, "Height Climbed", style4);
         HPtext = game.add.text(625,0, "HPtext");
         var style3 = {font: "bold 22px Arial"}
-        leveltext = game.add.text(690,50, "Level: " + (levelcount-1), style3);
+        leveltext = game.add.text(710,40, "Level: " + (levelcount-1), style3);
 
         // platforms = game.add.group()
         // platforms.enableBody = true
@@ -284,8 +284,8 @@ demo.state0.prototype = {
         if (HP >= 0){
             HPtext.destroy();
             heightClimbedText.destroy();
-            var style2 = {font: "bold 22px Arial"}
-            HPtext = game.add.text(690,0, "HP: " + HP.toString(), style2);
+            var style2 = {fill: "#fff", font: "bold 22px Arial"}
+            HPtext = game.add.text(700,0, "HP: " + HP.toString(), style2);
             var style = {fill: "#fff", font: "bold 22px Arial"}
             heightClimbedText = game.add.text(0,0, "Distance Climbed: "+ heightClimbed.toString(), style);
         }
@@ -298,8 +298,8 @@ demo.state0.prototype = {
             }
             HPtext.destroy();
             player.destroy();
-            var style2 = {font: "bold 22px Arial"};
-            HPtext = game.add.text(600,0, "You are dead", style2);
+            var style2 = {fill: "red", font: "bold 22px Arial"};
+            HPtext = game.add.text(660,0, "You are dead", style2);
 
             
         }
@@ -420,10 +420,11 @@ function drinkWater(player, water) {
     powerUpSound.play()
     water.destroy();
     boost = game.add.sprite(player.x, player.y, 'hpBoost');
-    boost.animations.add('all', [0,3,6,1,4,2,5, 7], 5, true);
+    boost.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boost.play('all')
     HP += 75;
-    setTimeout(() => boost.destroy(), 300);
+    setTimeout(() => boost.destroy(), 200);
+    setTimeout(() => boost.destroy(), 200)
     
 
 }
@@ -432,11 +433,12 @@ function eatBanana(player, banana) {
 
     powerUpSound.play();
     banana.destroy();
-    boost = game.add.sprite(player.x, player.y, 'hpBoost');
-    boost.animations.add('all', [0,3,6,1,4,2,5, 7], 5, true);
-    boost.play('all')
+    boostB = game.add.sprite(player.x, player.y, 'hpBoost');
+    boostB.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
+    boostB.play('all')
     HP += 75;
-    setTimeout(() => boost.destroy(), 300);
+    setTimeout(() => boostB.destroy(), 200);
+    setTimeout(() => boostB.destroy(), 200);
    
 }
 
