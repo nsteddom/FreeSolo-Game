@@ -56,8 +56,12 @@ function changeState(i, stateNum){
     localheight = 0;
     music.pause();
     HP = 1000;
-
-    levelcount += 1;
+    if (isAlive){
+        levelcount +=1;
+    }   
+    else{
+        levelcount = 1;
+    }
 
   }
   
