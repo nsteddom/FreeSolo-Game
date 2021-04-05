@@ -193,7 +193,7 @@ demo.state0.prototype = {
         heightClimbedText = game.add.text(0,0, "Height Climbed");
         HPtext = game.add.text(625,0, "HPtext");
         var style3 = {font: "bold 22px Arial"}
-        leveltext = game.add.text(690,50, "Level: " + (levelcount - 1), style3);
+        leveltext = game.add.text(690,50, "Level: " + (levelcount), style3);
 
         // platforms = game.add.group()
         // platforms.enableBody = true
