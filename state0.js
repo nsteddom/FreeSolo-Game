@@ -128,7 +128,8 @@ demo.state0.prototype = {
         player = game.add.sprite(300, game.world.height, 'climber')
 
         for (i=0; i<levelcount; i++ ){
-            rocklist[i] = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
+            rocklist[i] = game.add.sprite(Math.random() * (game.world.width- 280) + 120, Math.random()*.4*game.world.height , 'rock');
+            rocklist[i].scale.setTo(Math.random()*2);
         }
         
         // rock1 = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
@@ -403,7 +404,7 @@ function resetBirdPos(bird) {
     }
 
 function rockCollision(){
-    HP -= 0.575
+    HP -= 175
 }
 
 
