@@ -293,8 +293,7 @@ demo.state0.prototype = {
             if (isAlive){
                 death.play();
                 isAlive = false;
-                gameSound.pause();
-                soundEffect.pause();
+
             }
             HPtext.destroy();
             player.destroy();
