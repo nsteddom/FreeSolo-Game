@@ -26,11 +26,15 @@ demo.state0.prototype = {
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
         game.load.spritesheet('rock', 'assets/rock.png', 60, 65);
-
-
+        game.load.audio('hitRock', 'assets/sounds/hit_rock_sound_mixdown.mp3');
+        game.load.audio('powerUp', 'assets/sounds/464902__plasterbrain__yume-nikki-effect-equip.mp3')
+        game.load.audio('death', 'assets/sounds/538151__fupicat__8bit-fall.wav')
+        game.load.audio('gameMusic', 'assets/sounds/game_sound.mp3')
+        game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
+        game.load.spritesheet('hpBoost', 'assets/plus_hp.png', 60, 60)
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
         game.load.tilemap('base', 'assets/tiles/last.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.image('banana', 'assets/banana.png');
+        game.load.image('banana', 'assets/banana.png', 10, 10);
         game.load.image('person', 'assets/person.png');
         // // game.load.image('rock1', 'assets/tiles/rock1.png')
         // // game.load.image('rock2', 'assets/tiles/rock2.png')
@@ -168,12 +172,14 @@ demo.state0.prototype = {
      
         
 
-        backgroundMusic = game.add.audio('backgroundMusic', .2);
+        gameSound = game.add.audio('gameMusic', .4)
 
-        soundEffect = game.add.audio('soundeffect', .2);
-        deathSound = game.add.audio('deathSound'), .2;
+        soundEffect = game.add.audio('soundeffect', .3);
+        death = game.add.audio('death', .7);
+        powerUpSound = game.add.audio('powerUp', .1);
+        getHit = game.add.audio('hitRock', .2);
 
-        backgroundMusic.play();
+        gameSound.play();
         soundEffect.play();
 
         
@@ -227,6 +233,7 @@ demo.state0.prototype = {
         
         for (i =0; i<levelcount; i++){
             if (Math.abs(player.x-rocklist[i].x) < 25 && Math.abs(player.y-rocklist[i].y) < 25){
+                getHit.play();
                 rockCollision();
     
             }
@@ -284,9 +291,9 @@ demo.state0.prototype = {
         }
         else{
             if (isAlive){
-                deathSound.play();
+                death.play();
                 isAlive = false;
-                backgroundMusic.pause();
+                gameSound.pause();
                 soundEffect.pause();
             }
             HPtext.destroy();
@@ -410,14 +417,27 @@ function rockCollision(){
 
 
 function drinkWater(player, water) {
+    powerUpSound.play()
     water.destroy();
+    boost = game.add.sprite(player.x, player.y, 'hpBoost');
+    boost.animations.add('all', [0,3,6,1,4,2,5, 7], 5, true);
+    boost.play('all')
     HP += 75;
+    setTimeout(() => boost.destroy(), 300);
+    
 
 }
 
 function eatBanana(player, banana) {
+
+    powerUpSound.play();
     banana.destroy();
+    boost = game.add.sprite(player.x, player.y, 'hpBoost');
+    boost.animations.add('all', [0,3,6,1,4,2,5, 7], 5, true);
+    boost.play('all')
     HP += 75;
+    setTimeout(() => boost.destroy(), 300);
+   
 }
 
 function moveSpeed(speed, HP){
