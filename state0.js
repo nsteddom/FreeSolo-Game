@@ -302,7 +302,7 @@ demo.state0.prototype = {
             if (player.x < game.world.width-160){
                 player.x += moveSpeed(speed, HP);
                 player.animations.play('all');
-                HP -=1
+                HP -= 0.5
     
             }
 
@@ -314,7 +314,7 @@ demo.state0.prototype = {
 
             if (player.x > 120 ){
                 player.x -= moveSpeed(speed, HP);    
-                HP -= 1
+                HP -= 0.5
                 player.animations.play('all');
 
             }
@@ -333,7 +333,7 @@ demo.state0.prototype = {
             else{
                 heightClimbed -= moveSpeed(speed, HP);
                 localheight -= moveSpeed(speed, HP);
-                HP -= 1
+                HP -= 0.5
 
             }
                
@@ -403,20 +403,20 @@ function resetBirdPos(bird) {
     }
 
 function rockCollision(){
-    HP -= 175
+    HP -= 0.575
 }
 
 
 
 function drinkWater(player, water) {
     water.destroy();
-    HP += 100
+    HP += 75;
 
 }
 
 function eatBanana(player, banana) {
     banana.destroy();
-    HP += 50;
+    HP += 75;
 }
 
 function moveSpeed(speed, HP){
