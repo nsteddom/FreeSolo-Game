@@ -288,7 +288,7 @@ demo.state0.prototype = {
         if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 
             if (player.x < game.world.width-160){
-                player.x += speed*(HP/1000)*(HP/1000);
+                player.x += moveSpeed(speed, HP);
                 player.animations.play('all');
                 HP -=1
     
@@ -301,7 +301,7 @@ demo.state0.prototype = {
         if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 
             if (player.x > 120 ){
-                player.x -= speed*(HP/1000)*(HP/1000);    
+                player.x -= moveSpeed(speed, HP);    
                 HP -= 1
                 player.animations.play('all');
 
@@ -311,7 +311,7 @@ demo.state0.prototype = {
         }
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-            player.y += speed*(HP/1000)*(HP/1000);
+            player.y += moveSpeed(speed, HP);
             player.animations.play('all');
            
             if (localheight < 0){
@@ -319,8 +319,8 @@ demo.state0.prototype = {
             }
 
             else{
-                heightClimbed -= speed*(HP/1000)*(HP/1000);
-                localheight -= speed*(HP/1000)*(HP/1000);
+                heightClimbed -= moveSpeed(speed, HP);
+                localheight -= moveSpeed(speed, HP);
                 HP -= 1
 
             }
@@ -329,11 +329,11 @@ demo.state0.prototype = {
 
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-            player.y -= speed*(HP/1000)*(HP/1000);
+            player.y -= moveSpeed(speed, HP);
             player.animations.play('all');
 
-            heightClimbed += speed*(HP/1000)*(HP/1000); 
-            localheight += speed*(HP/1000)*(HP/1000);   
+            heightClimbed += moveSpeed(speed, HP); 
+            localheight += moveSpeed(speed, HP);   
   
             
             if (localheight > game.world.height){
@@ -405,6 +405,10 @@ function drinkWater(player, water) {
 function eatBanana(player, banana) {
     banana.destroy();
     HP += 50;
+}
+
+function moveSpeed(speed, HP){
+    return Math.max(speed*(HP/1000)**2, 0.5*speed);
 }
 
 
