@@ -55,7 +55,7 @@ function changeState(i, stateNum){
     game.state.start('state' + 0);
     localheight = 0;
     music.pause();
-    HP = 1000;
+    
     console.log(isAlive);
     if (isAlive){
         levelcount +=1;
