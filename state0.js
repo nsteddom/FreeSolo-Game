@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0 ;
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3;
 
 demo.state0 = function(){};
 
@@ -29,18 +29,23 @@ demo.state0.prototype = {
 
 
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
-        game.load.tilemap('base', 'assets/tiles/try.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('base', 'assets/tiles/last.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('banana', 'assets/banana.png');
         game.load.image('person', 'assets/person.png');
         // // game.load.image('rock1', 'assets/tiles/rock1.png')
         // // game.load.image('rock2', 'assets/tiles/rock2.png')
         // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
-        game.load.image('sky', 'assets/tiles/sky.png')
-        game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
-        game.load.image('rockobstacle', 'assets/tiles/rockobstacle.png')
-        game.load.image('black', 'assets/tiles/black.png')
+        // game.load.image('sky', 'assets/tiles/sky.png')
+        // game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
+        // game.load.image('rockobstacle', 'assets/tiles/rockobstacle.png')
+        // game.load.image('black', 'assets/tiles/black.png')
         game.load.image('cloud', 'assets/tiles/cloud.png')
         game.load.image('sun', 'assets/tiles/sun.png')
+        game.load.image('sky1', 'assets/tiles/sky1.png')
+        // game.load.image('crack1', 'assets/tiles/crack1.png')
+        game.load.image('crack3', 'assets/tiles/crack3.png')
+        // game.load.image('circles', 'assets/tiles/circles.png')
+        game.load.image('sky', 'assets/tiles/sky.tsx')
         
         
 
@@ -57,17 +62,24 @@ demo.state0.prototype = {
 
 
         base.addTilesetImage('sky');
+        base.addTilesetImage('sky1');
         
-        base.addTilesetImage('rockTile1');
-        base.addTilesetImage('black');
+        // base.addTilesetImage('rockTile1');
+        // base.addTilesetImage('black');
         base.addTilesetImage('cloud');
         base.addTilesetImage('sun');
-        base.addTilesetImage('rockobstacle');
+        // base.addTilesetImage('crack1');
+        base.addTilesetImage('crack3');
+        // base.addTilesetImage('circles');
+        // base.addTilesetImage('rockobstacle');
+        
         
         layer1 = base.createLayer('Tile Layer 1');
         layer2 = base.createLayer('Tile Layer 2');
+        layer3 = base.createLayer('Tile Layer 3');
         
-        base.setCollisionBetween(26, 61, true, 'Tile Layer 2');
+        
+        // base.setCollisionBetween(26, 61, true, 'Tile Layer 2');
         
 
         // // var rock1 = base.createLayer('rock1');
@@ -138,7 +150,7 @@ demo.state0.prototype = {
 
         
         
-        game.physics.arcade.enable(player)
+        game.physics.enable(player)
 
 
         // game.physics.arcade.enable(rock1)
@@ -352,7 +364,7 @@ demo.state0.prototype = {
         if (!game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && !game.input.keyboard.isDown(Phaser.Keyboard.UP)
         && !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             player.frame = 0
-
+            
         }
         
         
