@@ -14,6 +14,7 @@ demo.state1.prototype = {
 
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.stage.backgroundColor = '#800080';
         theMusic = game.add.audio('mountain', .2, true)
         theMusic.play();
