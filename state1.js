@@ -15,7 +15,8 @@ demo.state1.prototype = {
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#800080';
-        music = game.add.audio('mountain', .2)
+        theMusic = game.add.audio('mountain', .2, true)
+        theMusic.play();
         game.add.sprite(0, 0, 'background');
         game.add.image(470, 60, 'logo');
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
@@ -35,7 +36,7 @@ demo.state1.prototype = {
         
 
         
-        music.play();
+        
 
 
         addChangeStateEventListeners();
@@ -44,7 +45,6 @@ demo.state1.prototype = {
     },
 
     update: function(){
-        music.resume();
         moveBird(bird, 3);
         bird.animations.play('all');
 
@@ -54,7 +54,7 @@ demo.state1.prototype = {
 function changeState(i, stateNum){
     game.state.start('state' + 0);
     localheight = 0;
-    music.pause();
+    theMusic.pause();
     
     console.log(isAlive);
     if (isAlive){
