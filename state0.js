@@ -124,7 +124,6 @@ demo.state0.prototype = {
         var n = 0;
         while (n < 3) {
             var banana = bananas.create(250 + (n * 100) + ((Math.random() * 200)), (70 + (Math.random() * (game.world.height - 200))), 'banana');
-            console.log('banana')
             n++;
         }
 
@@ -246,6 +245,8 @@ demo.state0.prototype = {
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
         game.physics.arcade.overlap(player, bananas, eatBanana, null, this);
         bird.animations.play('all');
+        
+        
 
         // }
 
@@ -418,12 +419,12 @@ function rockCollision(){
 function drinkWater(player, water) {
     powerUpSound.play()
     water.destroy();
-    boost = game.add.sprite(player.x, player.y, 'hpBoost');
+    boost = game.add.sprite(water.x, water.y, 'hpBoost');
     boost.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boost.play('all')
     HP += 75;
-    setTimeout(() => boost.destroy(), 200);
-    setTimeout(() => boost.destroy(), 200)
+    setTimeout(function(){boost.animations.destroy(); boost.destroy();}, 200);
+    
     
 
 }
@@ -432,18 +433,18 @@ function eatBanana(player, banana) {
 
     powerUpSound.play();
     banana.destroy();
-    boostB = game.add.sprite(player.x, player.y, 'hpBoost');
+    boostB = game.add.sprite(banana.x, banana.y, 'hpBoost');
     boostB.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
-    boostB.play('all')
+    boostB.play('all');
     HP += 75;
-    setTimeout(() => boostB.destroy(), 200);
-    setTimeout(() => boostB.destroy(), 200);
+    setTimeout(function(){boostB.animations.destroy(); boostB.destroy();} , 200);
    
 }
 
 function moveSpeed(speed, HP){
     return Math.max(speed*(HP/1000)**2, 0.5*speed);
 }
+
 
 
 
