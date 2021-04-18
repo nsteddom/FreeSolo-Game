@@ -25,7 +25,7 @@ demo.state0.prototype = {
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
-        game.load.spritesheet('rock', 'assets/rock.png', 60, 65);
+        game.load.spritesheet('rock', 'assets/rock.png', 65, 65);
         game.load.audio('hitRock', 'assets/sounds/hit_rock_sound_mixdown.mp3');
         game.load.audio('powerUp', 'assets/sounds/464902__plasterbrain__yume-nikki-effect-equip.mp3')
         game.load.audio('death', 'assets/sounds/538151__fupicat__8bit-fall.wav')
@@ -132,7 +132,7 @@ demo.state0.prototype = {
 
         for (i=0; i<levelcount; i++ ){
             rocklist[i] = game.add.sprite(Math.random() * (game.world.width- 280) + 120, Math.random()*.4*game.world.height , 'rock');
-            rocklist[i].scale.setTo(Math.random()*2);
+            rocklist[i].scale.setTo(Math.max(Math.random()*2, .4));
         }
         
         // rock1 = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
@@ -356,7 +356,7 @@ demo.state0.prototype = {
             localheight += moveSpeed(speed, HP);   
   
             
-            if (localheight > game.world.height){
+            if (localheight > game.world.height-10){
                 changeState();
 
 
