@@ -33,7 +33,7 @@ demo.state1.prototype = {
         
 
 
-        game.add.text(400,230, "Climb an unforgiving mountain using\nthe arrow keys to move.", style);
+        game.add.text(400,230, "Climb an unforgiving mountain using\nthe WASD keys to move.", style);
         game.add.text(620,320, "Try not to die.", style);
         game.add.text(580,575, "Press 1 to commence", style2);
         var button1 = game.add.button(0, -8, 'htp', actionOnClick1, this);
