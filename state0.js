@@ -113,7 +113,7 @@ demo.state0.prototype = {
        
         var i = 0;
         while (i < 4) {
-            var water = waters.create(250 + (i * 150) + ((Math.random() * 130)), (50 + (i * 150) + (Math.random() * (game.world.height - 200))), 'water');
+            var water = waters.create(Math.random() * (game.world.width- 280) + 120, Math.random()*game.world.height, 'water');
             i++
             
         }
@@ -124,7 +124,7 @@ demo.state0.prototype = {
 
         var n = 0;
         while (n < 3) {
-            var banana = bananas.create(250 + (n * 100) + ((Math.random() * 200)), (70 + (Math.random() * (game.world.height - 200))), 'banana');
+            var banana = bananas.create(Math.random() * (game.world.width- 280) + 120, Math.random()*game.world.height, 'banana');
             n++;
         }
 
