@@ -25,7 +25,7 @@ demo.state0.prototype = {
         game.load.image('water','assets/Bottle.png');
         game.load.image('mountain', 'assets/mountain.png', 800, 400);
         game.load.spritesheet('climber', 'assets/climber.png', 60, 60);
-        game.load.spritesheet('rock', 'assets/rock.png', 65, 65);
+        game.load.spritesheet('rock', 'assets/new_rock.png', 60, 60);
         game.load.audio('hitRock', 'assets/sounds/hit_rock_sound_mixdown.mp3');
         game.load.audio('powerUp', 'assets/sounds/464902__plasterbrain__yume-nikki-effect-equip.mp3')
         game.load.audio('death', 'assets/sounds/538151__fupicat__8bit-fall.wav')
