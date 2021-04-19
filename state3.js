@@ -66,6 +66,7 @@ function goToMain() {
     localheight = 0;
     speed = 5;
     levelcount = 1;
+    gameSound.pause();
     game.state.start('state1');
 }
 

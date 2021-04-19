@@ -303,8 +303,8 @@ demo.state0.prototype = {
             if (isAlive){
                 death.play();
                 isAlive = false;
-                
-                
+                soundEffect.pause();
+                gameSound.pause();
                 
                 game.state.restart();
                 game.state.start('state3', true, false);
@@ -400,7 +400,8 @@ function changeState(i, stateNum){
         game.state.start('state' + 0, true, false);
         localheight = 0;
         gameSound.pause();
-        
+        soundEffect.pause();
+        theMusic.pause();
         
         console.log(isAlive);
         if (isAlive){
@@ -486,6 +487,7 @@ function mainScreen() {
     localheight = 0;
     speed = 5;
     levelcount = 1;
+    gameSound.pause();
     game.state.start('state1', true, false);
 }
 
