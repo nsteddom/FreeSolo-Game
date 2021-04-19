@@ -319,7 +319,7 @@ demo.state0.prototype = {
         }
 
         
-        if (game.input.keyboard.isDown(Phaser.Keyboard.D)){
+        if (game.input.keyboard.isDown(Phaser.Keyboard.D) || game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 
             if (player.x < game.world.width-160){
                 player.x += moveSpeed(speed, HP);
@@ -332,7 +332,7 @@ demo.state0.prototype = {
             
         }
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.A)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.A) || game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 
             if (player.x > 120 ){
                 player.x -= moveSpeed(speed, HP);    
@@ -344,7 +344,7 @@ demo.state0.prototype = {
          
         }
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.S)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.S) || game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
             player.y += moveSpeed(speed, HP);
             player.animations.play('all');
            
@@ -362,7 +362,7 @@ demo.state0.prototype = {
         }   
 
 
-        if(game.input.keyboard.isDown(Phaser.Keyboard.W)){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.W) || game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             player.y -= moveSpeed(speed, HP);
             player.animations.play('all');
 
@@ -384,7 +384,8 @@ demo.state0.prototype = {
 
 
         if (!game.input.keyboard.isDown(Phaser.Keyboard.S) && !game.input.keyboard.isDown(Phaser.Keyboard.W)
-        && !game.input.keyboard.isDown(Phaser.Keyboard.D) && !game.input.keyboard.isDown(Phaser.Keyboard.A)){
+        && !game.input.keyboard.isDown(Phaser.Keyboard.D) && !game.input.keyboard.isDown(Phaser.Keyboard.A) && !game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && !game.input.keyboard.isDown(Phaser.Keyboard.UP)
+        && !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             player.frame = 0
             
         }
