@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3;
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [];
 
 demo.state0 = function(){};
 
@@ -132,7 +132,9 @@ demo.state0.prototype = {
 
         for (i=0; i<levelcount; i++ ){
             rocklist[i] = game.add.sprite(Math.random() * (game.world.width- 280) + 120, Math.random()*.4*game.world.height , 'rock');
-            rocklist[i].scale.setTo(Math.max(Math.random()*2, .4));
+            size = Math.max(Math.random()*2, .4);
+            rocklist[i].scale.setTo(size);
+            sizelist[i] = size;
         }
         
         // rock1 = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
@@ -231,7 +233,12 @@ demo.state0.prototype = {
 
         
         for (i =0; i<levelcount; i++){
-            if (Math.abs(player.x-rocklist[i].x) < 25 && Math.abs(player.y-rocklist[i].y) < 25){
+            rockCenterX = rocklist[i].x+sizelist[i]*65/2 ;
+            rockCenterY = rocklist[i].y+sizelist[i]*65/2;
+            playerCenterX = player.x + 60/2;
+            playerCenterY = player.y + 60/2;
+
+            if (Math.abs(rockCenterX-playerCenterX) < 30 && Math.abs(playerCenterY-rockCenterY) < 30){
                 getHit.play();
                 rockCollision();
     
