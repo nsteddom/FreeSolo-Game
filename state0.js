@@ -1,7 +1,7 @@
 // Level One
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
-var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [];
+var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [], rocklists = [], sizelists = [];
 
 demo.state0 = function(){};
 
@@ -50,6 +50,7 @@ demo.state0.prototype = {
         game.load.image('crack3', 'assets/tiles/crack3.png')
         // game.load.image('circles', 'assets/tiles/circles.png')
         game.load.image('sky', 'assets/tiles/sky.tsx')
+        game.load.image('menu', 'assets/menu.png')
         
         
 
@@ -93,7 +94,7 @@ demo.state0.prototype = {
 
 
 
-        addChangeStateEventListeners();
+        
 
 
 
@@ -202,7 +203,8 @@ demo.state0.prototype = {
         HPtext = game.add.text(625,0, "HPtext");
         var style3 = {font: "bold 22px Arial"}
         leveltext = game.add.text(710,40, "Level: " + (levelcount-1), style3);
-
+        var button4 = game.add.button(0, 500, 'menu', mainScreen, this);
+        
         // platforms = game.add.group()
         // platforms.enableBody = true
 
@@ -301,6 +303,11 @@ demo.state0.prototype = {
             if (isAlive){
                 death.play();
                 isAlive = false;
+                
+                
+                
+                game.state.restart();
+                game.state.start('state3', true, false);
 
             }
             HPtext.destroy();
@@ -382,12 +389,28 @@ demo.state0.prototype = {
             
         }
         
-        
+        addChangeStateEventListeners();
   }
     
 
     }
 
+function changeState(i, stateNum){
+        game.state.start('state' + 0, true, false);
+        localheight = 0;
+        gameSound.pause();
+        
+        console.log(isAlive);
+        if (isAlive){
+            levelcount +=1;
+        }   
+        else{
+            levelcount = 1;
+            isAlive = true;
+        }
+    
+}
+      
 
 function moverock(rock, speed) {
     rock.y += speed + rock.y/30;
@@ -454,5 +477,13 @@ function moveSpeed(speed, HP){
 
 
 
-
+function mainScreen() {
+    heightClimbed = 0;
+    isAlive = true;
+    HP = 1000;
+    localheight = 0;
+    speed = 5;
+    levelcount = 1;
+    game.state.start('state1', true, false);
+}
 
