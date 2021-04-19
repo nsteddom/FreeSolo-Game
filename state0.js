@@ -398,7 +398,7 @@ demo.state0.prototype = {
 function changeState(i, stateNum){
         game.state.start('state' + 0, true, false);
         localheight = 0;
-        gameSound.pause();
+        
         
         console.log(isAlive);
         if (isAlive){
