@@ -32,7 +32,7 @@ demo.state2.prototype = {
         var circle = {font: '70px Arial', fill: '#FF0000'}
         game.add.text(180, 120, 'O', circle);
         game.add.text(555, 410, 'O', circle)
-        game.add.text(400, 150, 'Use the arrow keys to move around the mountain.', style)
+        game.add.text(400, 150, 'Use the arrow or WASD keys to move around the mountain.', style)
         game.add.text(400, 240, 'Avoid falling rocks, and make your way to the top!', style);
         game.add.text(50, 350, 'Make sure to watch your hp! As you go up the mountain your hp will decrease.', newStyle)
         game.add.text(50, 420, 'As your HP nears 0 your speed will lower significantly and you will be close to death.', newStyle)
