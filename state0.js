@@ -475,7 +475,7 @@ function eatBanana(player, banana) {
 }
 
 function moveSpeed(speed, HP){
-    return Math.min(Math.max(speed*(HP/1000)**2, 0.5*speed),4*speed);
+    return Math.min(Math.max(speed*(HP/1000)**2, 0.5*speed),3*speed);
 }
 
 
