@@ -181,8 +181,10 @@ demo.state0.prototype = {
         powerUpSound = game.add.audio('powerUp', .1);
         getHit = game.add.audio('hitRock', .2);
 
-        gameSound.play();
-        soundEffect.play();
+        if (levelcount == 2){
+
+            gameSound.play();
+            soundEffect.play();}
 
         
         for (i =0; i<levelcount; i++){
@@ -399,9 +401,7 @@ demo.state0.prototype = {
 function changeState(i, stateNum){
         game.state.start('state' + 0, true, false);
         localheight = 0;
-        gameSound.pause();
-        soundEffect.pause();
-        theMusic.pause();
+        
         
         console.log(isAlive);
         if (isAlive){
@@ -455,7 +455,7 @@ function drinkWater(player, water) {
     boost = game.add.sprite(water.x, water.y, 'hpBoost');
     boost.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boost.play('all')
-    HP += 75;
+    HP += 125;
     setTimeout(function(){boost.animations.destroy(); boost.destroy();}, 200);
     
     
@@ -469,13 +469,13 @@ function eatBanana(player, banana) {
     boostB = game.add.sprite(banana.x, banana.y, 'hpBoost');
     boostB.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boostB.play('all');
-    HP += 75;
+    HP += 125;
     setTimeout(function(){boostB.animations.destroy(); boostB.destroy();} , 200);
    
 }
 
 function moveSpeed(speed, HP){
-    return Math.max(speed*(HP/1000)**2, 0.5*speed);
+    return Math.min(Math.max(speed*(HP/1000)**2, 0.5*speed),4*speed);
 }
 
 
