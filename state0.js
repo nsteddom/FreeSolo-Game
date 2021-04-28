@@ -2,6 +2,7 @@
 // climbs on wall, height bar, sound, music (track sources), one piece of animated art
 
 var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [], rocklists = [], sizelists = [];
+var lBound = 120, rBound = 160;
 
 demo.state0 = function(){};
 
@@ -113,7 +114,7 @@ demo.state0.prototype = {
        
         var i = 0;
         while (i < 4) {
-            var water = waters.create(Math.random() * (game.world.width- 280) + 120, Math.random()*game.world.height, 'water');
+            var water = waters.create(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*game.world.height, 'water');
             i++
             
         }
@@ -124,7 +125,7 @@ demo.state0.prototype = {
 
         var n = 0;
         while (n < 3) {
-            var banana = bananas.create(Math.random() * (game.world.width- 280) + 120, Math.random()*game.world.height, 'banana');
+            var banana = bananas.create(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*game.world.height, 'banana');
             n++;
         }
 
@@ -132,7 +133,7 @@ demo.state0.prototype = {
         player = game.add.sprite(300, game.world.height, 'climber')
 
         for (i=0; i<levelcount; i++ ){
-            rocklist[i] = game.add.sprite(Math.random() * (game.world.width- 280) + 120, Math.random()*.4*game.world.height , 'rock');
+            rocklist[i] = game.add.sprite(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*.4*game.world.height , 'rock');
             size = Math.max(Math.random()*2, .4);
             rocklist[i].scale.setTo(size);
             sizelist[i] = size;
@@ -323,7 +324,7 @@ demo.state0.prototype = {
         
         if (game.input.keyboard.isDown(Phaser.Keyboard.D) || game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
 
-            if (player.x < game.world.width-160){
+            if (player.x < game.world.width-rBound){
                 player.x += moveSpeed(speed, HP);
                 player.animations.play('all');
                 HP -= 0.5
@@ -336,7 +337,7 @@ demo.state0.prototype = {
 
         if(game.input.keyboard.isDown(Phaser.Keyboard.A) || game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
 
-            if (player.x > 120 ){
+            if (player.x > lBound ){
                 player.x -= moveSpeed(speed, HP);    
                 HP -= 0.5
                 player.animations.play('all');
@@ -427,7 +428,7 @@ function moverock(rock, speed) {
 function resetrockPos(rock) {
     rock.y = 0;
     // var randomY = Math.between(0, game.world.height);
-    rock.x = Math.random() * (game.world.width- 280) + 120;
+    rock.x = Math.random() * (game.world.width- lBound-rBound) + lBound;
     }
 
 function moveBird(bird, speed) {
