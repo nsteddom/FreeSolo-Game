@@ -225,7 +225,7 @@ demo.state0.prototype = {
 
 
     update: function(){
-        game.physics.arcade.collide(player, layer2, function(){ console.log('SHIT!!!')});
+        game.physics.arcade.collide(player, layer2);
         heightClimbed = Math.max(0, heightClimbed);
         heightClimbed = Math.round(heightClimbed);
 
