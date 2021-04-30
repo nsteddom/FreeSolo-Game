@@ -79,6 +79,5 @@ function addChangeStateEventListeners(){
     }
 function resetBirdPos(bird) {
     bird.x = game.world.width;
-    // var randomY = Math.between(0, game.world.height);
     bird.y = Math.random() * (game.world.height - 200)
     }

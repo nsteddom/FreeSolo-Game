@@ -20,7 +20,6 @@ demo.state3.prototype = {
         grd.addColorStop(1,"#1b2366");
         myBitmap.context.fillStyle=grd;
         myBitmap.context.fillRect(0,0,this.game.width, this.game.height);
-    //myBitmap.draw(new Phaser.Sprite(this.game, 50, 50, 'player'), 0, 0);
         var lol = this.game.add.sprite(0,0, myBitmap);
         lol.alpha = 0;
         this.game.add.tween(lol).to({ alpha: 1 }, 2000).start();
@@ -38,7 +37,6 @@ demo.state3.prototype = {
         var rectangle = game.add.image(180, 80, 'block')
         endStyle = {font: 'bold 25px Arial', align: 'center'}
         game.add.text(260, 220, 'Height Reached: ' + heightClimbed, endStyle)
-        // rectangle.scale.setTo(.05, .5)
         var button2 = game.add.button(300, 400, 'menu', goToMain, this, 0, 1);
         var button3 = game.add.button(420,400, 'playAgain', startGame, this, 0, 1);
         
@@ -89,6 +87,5 @@ function moverock(rocks, speed) {
 
 function resetrockPos(rocks) {
         rocks.y = 0;
-        // var randomY = Math.between(0, game.world.height);
         rocks.x = Math.random() * (game.world.width);
     }

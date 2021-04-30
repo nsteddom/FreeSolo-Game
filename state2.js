@@ -18,9 +18,7 @@ demo.state2.prototype = {
         game.stage.backgroundColor = '#fff';
         game.add.sprite(0,0, 'sky');
         var keysPng = game.add.image(400, -40, 'keys');
-        //var awsdPng = game.add.image(500, -40, 'awsd');
         keysPng.scale.setTo(.6, .6)
-        //awsdPng.scale.setTo(.6,.6)
         var avoid = game.add.image(130, 50, 'avoid')
         avoid.scale.setTo(.4, .4)
         var example = game.add.image(490, 340, 'climbing')
