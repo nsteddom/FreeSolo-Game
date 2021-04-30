@@ -1,5 +1,5 @@
 // Level One
-// climbs on wall, height bar, sound, music (track sources), one piece of animated art
+
 
 var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [], rocklists = [], sizelists = [];
 var lBound = 120, rBound = 160;
@@ -37,19 +37,10 @@ demo.state0.prototype = {
         game.load.tilemap('base', 'assets/tiles/last.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('banana', 'assets/banana.png', 10, 10);
         game.load.image('person', 'assets/person.png');
-        // // game.load.image('rock1', 'assets/tiles/rock1.png')
-        // // game.load.image('rock2', 'assets/tiles/rock2.png')
-        // // game.load.image('rockObstacle', 'assets/tiles/rockObstacle.png')
-        // game.load.image('sky', 'assets/tiles/sky.png')
-        // game.load.image('rockTile1', 'assets/tiles/rockTile1.png')
-        // game.load.image('rockobstacle', 'assets/tiles/rockobstacle.png')
-        // game.load.image('black', 'assets/tiles/black.png')
         game.load.image('cloud', 'assets/tiles/cloud.png')
         game.load.image('sun', 'assets/tiles/sun.png')
         game.load.image('sky1', 'assets/tiles/sky1.png')
-        // game.load.image('crack1', 'assets/tiles/crack1.png')
         game.load.image('crack3', 'assets/tiles/crack3.png')
-        // game.load.image('circles', 'assets/tiles/circles.png')
         game.load.image('sky', 'assets/tiles/sky.tsx')
         game.load.image('menu', 'assets/menu.png')
         
@@ -69,45 +60,17 @@ demo.state0.prototype = {
 
         base.addTilesetImage('sky');
         base.addTilesetImage('sky1');
-        
-        // base.addTilesetImage('rockTile1');
-        // base.addTilesetImage('black');
         base.addTilesetImage('cloud');
         base.addTilesetImage('sun');
-        // base.addTilesetImage('crack1');
         base.addTilesetImage('crack3');
-        // base.addTilesetImage('circles');
-        // base.addTilesetImage('rockobstacle');
-        
-        
+
         layer1 = base.createLayer('Tile Layer 1');
         layer2 = base.createLayer('Tile Layer 2');
         layer3 = base.createLayer('Tile Layer 3');
-        
-        
-        // base.setCollisionBetween(26, 61, true, 'Tile Layer 2');
-        
 
-        // // var rock1 = base.createLayer('rock1');
-        // // var rock2 = base.createLayer('rock2');
-        // // var rockObstacle = base.createLayer('rockObstacle');
-        // var sky = base.createLayer('sky');
-
-
-
-        
-
-
-
-       
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        // game.add.sprite(0, 0, 'sky');
-        // game.add.sprite(120, 300, 'mountain');
-        // game.add.sprite(120, 0, 'mountain');
-       
-        
 
         waters = game.add.group();
         waters.enableBody = true;
@@ -139,38 +102,21 @@ demo.state0.prototype = {
             sizelist[i] = size;
         }
         
-        // rock1 = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
-        // rock2 = game.add.sprite(Math.random() * (game.world.width- 280) + 120,0, 'rock');
-
-        // rock1.scale.setTo(2,2);
-        // rock2.scale.setTo(2,2);
-
-        // for (i =0; i<levelcount; i++){
-        //     rocklist[i].scale.setTo(2,2);
-        // }
 
         bird = game.add.sprite(game.world.width, game.world.height - 300, 'bird');
         bird.scale.setTo(0.6,0.6);
-
-
-        // Added star image in the game for animated aspect. 
-        //star = game.add.image(550, game.world.height - 300, 'star')
 
         
         
         game.physics.enable(player)
 
 
-        // game.physics.arcade.enable(rock1)
-        // game.physics.arcade.enable(rock2)
-
-        
         for (i =0; i<levelcount; i++){
             game.physics.arcade.enable(rocklist[i]);
         }
 
         
-        // player.body.gravity.y = 500
+   
         player.body.collideWorldBounds = true;  
      
         
@@ -193,8 +139,6 @@ demo.state0.prototype = {
 
         }
 
-        // rock1.animations.add('all', [0, 1, 2], 3, true);
-        // rock2.animations.add('all', [0, 1, 2], 3, true);
 
         bird.animations.add('all', [0, 1], 4, true);
         player.animations.add('all', [0, 1, 2, 3, 4], 15, true);
@@ -208,17 +152,6 @@ demo.state0.prototype = {
         leveltext = game.add.text(710,40, "Level: " + (levelcount-1), style3);
         var button4 = game.add.button(0, 500, 'menu', mainScreen, this);
         
-        // platforms = game.add.group()
-        // platforms.enableBody = true
-
-        // var ground = platforms.create(0, game.world.height - 64, 'ground')
-        // ground.scale.setTo(2, 2)
-        // ground.body.immovable = true
-
-        // ground = game.add.sprite(0, game.world.height - 64, 'ground')
-        // game.physics.enableBody = true
-        // ground.scale.setTo(2, 2)
-        // ground.body.immovable = true
 
     },
 
@@ -230,11 +163,6 @@ demo.state0.prototype = {
         heightClimbed = Math.round(heightClimbed);
 
 
-        
-        // game.physics.arcade.collide(player, ground)
-
-        // Makes star go in a circle
-        // star.angle +=3;
 
         
         for (i =0; i<levelcount; i++){
@@ -250,22 +178,10 @@ demo.state0.prototype = {
             }
         }
 
-        // if (Math.abs(player.x-rock1.x) < 27 && Math.abs(player.y-rock1.y) < 50){
-        //     rockCollision();
-
 
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
         game.physics.arcade.overlap(player, bananas, eatBanana, null, this);
         bird.animations.play('all');
-        
-        
-
-        // }
-
-        // if (Math.abs(player.x-rock2.x) < 27 && Math.abs(player.y-rock2.y) < 50){
-        //     rockCollision();
-
-        // }
 
         
 
@@ -276,13 +192,10 @@ demo.state0.prototype = {
             moverock(rocklist[i], 1);
         }
 
-        // moverock(rock1, 1);
-        // moverock(rock2, 1)
 
         game.physics.arcade.overlap(player, waters, drinkWater, null, this);
 
-        // rock1.animations.play('all');
-        // rock2.animations.play('all');
+ 
 
         for (i =0; i<levelcount; i++){
             rocklist[i].animations.play('all');
@@ -427,7 +340,7 @@ function moverock(rock, speed) {
     
 function resetrockPos(rock) {
     rock.y = 0;
-    // var randomY = Math.between(0, game.world.height);
+
     rock.x = Math.random() * (game.world.width- lBound-rBound) + lBound;
     }
 
@@ -440,7 +353,7 @@ function moveBird(bird, speed) {
 
 function resetBirdPos(bird) {
     bird.x = game.world.width;
-    // var randomY = Math.between(0, game.world.height);
+
     bird.y = Math.random() * game.world.height
     }
 
