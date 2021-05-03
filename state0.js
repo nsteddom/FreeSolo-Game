@@ -2,7 +2,7 @@
 
 
 var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [], rocklists = [], sizelists = [];
-var lBound = 120, rBound = 160;
+var lBound = 150, rBound = 190;
 
 demo.state0 = function(){};
 
