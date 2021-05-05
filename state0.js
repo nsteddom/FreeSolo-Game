@@ -2,7 +2,7 @@
 
 
 var demo = {},  speed = 5, heightClimbed=0, heightClimbedText, HP =1000, HPtext, isAlive = true, layer = null, rocklist=[], levelcount = 1, localheight = 0, layer1, layer2, layer3, sizelist = [], rocklists = [], sizelists = [];
-var lBound = 150, rBound = 190;
+var lBound = 150, rBound = 190, numrocks = levelcount;
 
 demo.state0 = function(){};
 
@@ -95,7 +95,9 @@ demo.state0.prototype = {
 
         player = game.add.sprite(300, game.world.height, 'climber')
 
-        for (i=0; i<levelcount; i++ ){
+        numrocks = Math.floor(levelcount/2)
+
+        for (i=0; i<numrocks; i++ ){
             rocklist[i] = game.add.sprite(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*.4*game.world.height , 'rock');
             size = Math.max(Math.random()*2, .4);
             rocklist[i].scale.setTo(size);
@@ -111,7 +113,7 @@ demo.state0.prototype = {
         game.physics.enable(player)
 
 
-        for (i =0; i<levelcount; i++){
+        for (i =0; i<numrocks; i++){
             game.physics.arcade.enable(rocklist[i]);
         }
 
@@ -134,7 +136,7 @@ demo.state0.prototype = {
             soundEffect.play();}
 
         
-        for (i =0; i<levelcount; i++){
+        for (i =0; i<numrocks; i++){
             rocklist[i].animations.add('all', [0, 1, 2], 3, true);
 
         }
@@ -165,7 +167,7 @@ demo.state0.prototype = {
 
 
         
-        for (i =0; i<levelcount; i++){
+        for (i =0; i<numrocks; i++){
             rockCenterX = rocklist[i].x+sizelist[i]*65/2 ;
             rockCenterY = rocklist[i].y+sizelist[i]*65/2;
             playerCenterX = player.x + 60/2;
@@ -188,7 +190,7 @@ demo.state0.prototype = {
 
         moveBird(bird, 3);
 
-        for (i =0; i<levelcount; i++){
+        for (i =0; i<numrocks; i++){
             moverock(rocklist[i], 1);
         }
 
@@ -197,7 +199,7 @@ demo.state0.prototype = {
 
  
 
-        for (i =0; i<levelcount; i++){
+        for (i =0; i<numrocks; i++){
             rocklist[i].animations.play('all');
         }
 
