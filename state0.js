@@ -30,7 +30,7 @@ demo.state0.prototype = {
         game.load.audio('hitRock', 'assets/sounds/hit_rock_sound_mixdown.mp3');
         game.load.audio('powerUp', 'assets/sounds/464902__plasterbrain__yume-nikki-effect-equip.mp3')
         game.load.audio('death', 'assets/sounds/538151__fupicat__8bit-fall.wav')
-        game.load.audio('gameMusic', 'assets/sounds/game_sound.mp3')
+        game.load.audio('gameMusic', 'assets/sounds/gamesound_fs.mp3')
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
         game.load.spritesheet('hpBoost', 'assets/plus_hp.png', 60, 60)
         game.load.spritesheet('bird', 'assets/bird.png', 70, 70);
@@ -77,7 +77,7 @@ demo.state0.prototype = {
        
         var i = 0;
         while (i < 4) {
-            var water = waters.create(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*game.world.height, 'water');
+            var water = waters.create(Math.random() * (game.world.width- lBound-rBound) + lBound, (150 * i) + (Math.random() * 150), 'water');
             i++
             
         }
@@ -88,7 +88,7 @@ demo.state0.prototype = {
 
         var n = 0;
         while (n < 3) {
-            var banana = bananas.create(Math.random() * (game.world.width- lBound-rBound) + lBound, Math.random()*game.world.height, 'banana');
+            var banana = bananas.create(Math.random() * (game.world.width- lBound-rBound) + lBound,  (200 * n) + (Math.random() * 200), 'banana');
             n++;
         }
 
@@ -123,17 +123,14 @@ demo.state0.prototype = {
      
         
 
-        gameSound = game.add.audio('gameMusic', .4)
-
+        gameSound = game.add.audio('gameMusic', .9);
         soundEffect = game.add.audio('soundeffect', .3);
         death = game.add.audio('death', .7);
         powerUpSound = game.add.audio('powerUp', .1);
         getHit = game.add.audio('hitRock', .2);
-
-        if (levelcount == 2){
-
-            gameSound.play();
-            soundEffect.play();}
+        gameSound.play();
+        soundEffect.play();
+        
 
         
         for (i =0; i<numrocks; i++){
@@ -151,7 +148,7 @@ demo.state0.prototype = {
         heightClimbedText = game.add.text(0,0, "Height Climbed", style4);
         HPtext = game.add.text(625,0, "HPtext");
         var style3 = {font: "bold 22px Arial"}
-        leveltext = game.add.text(710,40, "Level: " + (levelcount-1), style3);
+        leveltext = game.add.text(710,40, "Level: " + (levelcount), style3);
         var button4 = game.add.button(0, 500, 'menu', mainScreen, this);
         
 
@@ -164,7 +161,7 @@ demo.state0.prototype = {
         heightClimbed = Math.max(0, heightClimbed);
         heightClimbed = Math.round(heightClimbed);
 
-
+        
 
         
         for (i =0; i<numrocks; i++){
@@ -195,8 +192,7 @@ demo.state0.prototype = {
         }
 
 
-        game.physics.arcade.overlap(player, waters, drinkWater, null, this);
-
+    
  
 
         for (i =0; i<numrocks; i++){
@@ -224,7 +220,7 @@ demo.state0.prototype = {
                 soundEffect.pause();
                 gameSound.pause();
                 
-                game.state.restart();
+                game.state.restart(true, false);
                 game.state.start('state3', true, false);
 
             }
@@ -315,15 +311,17 @@ demo.state0.prototype = {
     }
 
 function changeState(i, stateNum){
-        game.state.start('state' + 0, true, false);
+        game.state.start('state' + 0, false, false);
         localheight = 0;
         
         
         console.log(isAlive);
         if (isAlive){
+            gameSound.pause();
             levelcount +=1;
         }   
         else{
+            
             levelcount = 1;
             isAlive = true;
         }
@@ -372,10 +370,8 @@ function drinkWater(player, water) {
     boost.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boost.play('all')
     HP += 125;
-    setTimeout(function(){boost.animations.destroy(); boost.destroy();}, 200);
+    setTimeout(() => boost.destroy(), 200);
     
-    
-
 }
 
 function eatBanana(player, banana) {
@@ -386,8 +382,8 @@ function eatBanana(player, banana) {
     boostB.animations.add('all', [0,3,6,1,4,2,5, 7], 7, true);
     boostB.play('all');
     HP += 125;
-    setTimeout(function(){boostB.animations.destroy(); boostB.destroy();} , 200);
-   
+    setTimeout(() =>  boostB.destroy(), 200);
+    
 }
 
 function moveSpeed(speed, HP){
@@ -404,6 +400,7 @@ function mainScreen() {
     speed = 5;
     levelcount = 1;
     gameSound.pause();
-    game.state.start('state1', true, false);
+    game.state.restart(false, false);
+    game.state.start('state1', true, true);
 }
 

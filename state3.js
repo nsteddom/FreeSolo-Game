@@ -36,7 +36,7 @@ demo.state3.prototype = {
         }
         var rectangle = game.add.image(180, 80, 'block')
         endStyle = {font: 'bold 25px Arial', align: 'center'}
-        game.add.text(260, 220, 'Height Reached: ' + heightClimbed, endStyle)
+        game.add.text(260, 220, 'Height Reached: ' + heightClimbed + " ft.", endStyle)
         var button2 = game.add.button(300, 400, 'menu', goToMain, this, 0, 1);
         var button3 = game.add.button(420,400, 'playAgain', startGame, this, 0, 1);
         
@@ -44,7 +44,7 @@ demo.state3.prototype = {
     },
 
     update: function() {
-
+        gameSound.pause();
        
         for (i =0; i<10; i++){
             rocklists[i].animations.play('all');
